@@ -29,6 +29,10 @@ class Tree
     @root = delete_rec(@root, value)
   end
 
+  def find(value)
+    find_rec(@root, value)
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
@@ -86,5 +90,17 @@ class Tree
     node = node.left while node.left
 
     node
+  end
+
+  def find_rec(node, value)
+    return nil if node.nil?
+
+    if node.data == value
+      return node
+    elsif value < node.data
+      find_rec(node.left, value)
+    else
+      find_rec(node.right, value)
+    end
   end
 end
