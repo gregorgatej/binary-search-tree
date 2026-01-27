@@ -21,6 +21,8 @@ class Tree
     @root = build_tree(array)
   end
 
+  private
+  
   def build_tree(array, start = 0, stop = array.length - 1)
     return nil if start > stop
 
