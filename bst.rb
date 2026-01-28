@@ -94,6 +94,13 @@ class Tree
     result unless block_given?
   end
 
+  def height(value)
+    node = find(value)
+    return nil if node.nil?
+
+    height_rec(node)
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
@@ -163,5 +170,12 @@ class Tree
     else
       find_rec(node.right, value)
     end
+  end
+
+  def height_rec(node)
+    return -1 if node.nil?
+    height_left = height_rec(node.left)
+    height_right = height_rec(node.right)
+    1 + [height_left, height_right].max
   end
 end
