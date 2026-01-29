@@ -101,6 +101,22 @@ class Tree
     height_rec(node)
   end
 
+  def depth(value)
+    current = @root
+    depth = 0
+    while current
+      return depth if current.data == value
+      if value < current.data
+        current = current.left
+      else
+        current = current.right
+      end
+      depth += 1
+    end
+
+    nil
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
